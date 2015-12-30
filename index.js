@@ -1,4 +1,5 @@
 import React from 'react-native';
+
 const {
   PixelRatio,
   StatusBarIOS,
@@ -7,6 +8,7 @@ const {
   View,
   PropTypes
 } = React;
+
 import NavbarButton from './NavbarButton';
 import styles from './styles';
 
@@ -70,7 +72,7 @@ class NavigationBar extends Component {
 
     return (
       <Text
-        style={[styles.navBarTitleText, colorStyle, ]}>
+        style={[styles.navBarTitleText, colorStyle, this.props.titleStyle]}>
         {data.title}
       </Text>
     );
