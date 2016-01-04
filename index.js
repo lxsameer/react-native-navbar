@@ -51,16 +51,25 @@ class NavigationBar extends Component {
     customizeStatusBar(this.props.statusBar);
   }
 
-  getButtonElement(data = {}, style) {
+  getButtonElement(data = {}, style, back) {
     if (!!data.props) {
       return <View style={styles.navBarButton}>{data}</View>;
     }
 
-    return <NavbarButton
-      title={data.title}
-      style={[data.style, style, ]}
-      tintColor={data.tintColor}
-      handler={data.handler} />;
+    if (back) {
+      return <NavbarButton title={data.title}
+                           style={[data.style, style, ]}
+                           tintColor={data.tintColor}
+                           textStyle={this.props.btnTextStyle || {}}
+                           backImg={this.props.backImg}
+                           backImgStyle={this.props.backImgStyle}
+                           handler={data.handler} />;
+    }
+    return <NavbarButton title={data.title}
+                         style={[data.style, style, ]}
+                         tintColor={data.tintColor}
+                         textStyle={this.props.btnTextStyle || {}}
+                         handler={data.handler} />;
   }
 
   getTitleElement(data) {
@@ -90,8 +99,8 @@ class NavigationBar extends Component {
         {statusBar}
         <View style={[styles.navBar, this.props.style, ]}>
           {this.getTitleElement(this.props.title)}
-          {this.getButtonElement(this.props.leftButton, { marginLeft: 8, })}
-          {this.getButtonElement(this.props.rightButton, { marginRight: 8, })}
+          {this.getButtonElement(this.props.leftButton, { marginLeft: 8, }, false)}
+          {this.getButtonElement(this.props.rightButton, { marginRight: 8, }, true)}
         </View>
       </View>
     );

@@ -4,6 +4,7 @@ const {
   TouchableOpacity,
   Component,
   View,
+  Image,
   PropTypes,
 } = React;
 import styles from './styles';
@@ -14,8 +15,10 @@ export default class NavbarButton extends Component {
 
     return (
       <TouchableOpacity onPress={handler}>
-        <View style={style}>
-          <Text style={[styles.navBarButtonText, { color: tintColor, }, ]}>{title}</Text>
+        <View style={[style, {flexDirection: 'row', flex: 1}]}>
+          <Text style={[this.props.textStyle, styles.navBarButtonText, { color: tintColor, }, ]}>{title}</Text>
+          <Image source={this.props.backImg} style={this.props.backImgStyle} />
+
         </View>
       </TouchableOpacity>
     );
@@ -32,7 +35,9 @@ export default class NavbarButton extends Component {
   }
 
   static defaultProps = {
-    style: {},
+    style: {
+
+    },
     title: '',
     tintColor: '#0076FF',
     onPress: () => ({}),
